@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b14">
+
+<title>Pranav | Real Friends Test</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --blue: #4da6ff;
+    --dark: #080b14;
+    --card: #111827;
+    --muted: #a4aec0;
+    --green: #22c55e;
+    --red: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', Arial, sans-serif;
+    background:
+        radial-gradient(ellipse at top, #17284b 0%, transparent 50%),
+        var(--dark);
+    color: white;
+    min-height: 100vh;
+    padding: 18px 14px 35px;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+    max-width: 440px;
+    margin: auto;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 30px;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+.tag {
+    font-size: 10px;
+    color: var(--blue);
+    background: #142643;
+    padding: 8px 11px;
+    border-radius: 30px;
+    border: 1px solid #244a7c;
+}
+
+.screen {
+    display: none;
+    animation: appear .35s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.hero-sticker {
+    font-size: 70px;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 0 20px #257cff55);
+    animation: float 2.5s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+h1 {
+    font-size: 35px;
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+h1 span {
+    color: var(--blue);
+    text-shadow: 0 0 20px #4da6ff33;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-top: 14px;
+}
+
+.panel {
+    background: linear-gradient(145deg, #151e30, #0d1320);
+    border: 1px solid #27364d;
+    border-radius: 23px;
+    padding: 22px;
+    box-shadow: 0 15px 50px #00000030;
+}
+
+.label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: block;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #34445d;
+    background: #090f1c;
+    color: white;
+    border-radius: 13px;
+    outline: none;
+    font-size: 15px;
+    margin-bottom: 16px;
+}
+
+input[type="text"]:focus {
+    border-color: var(--blue);
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 13px;
+    color: white;
+    font-weight: 800;
+    font-size: 14px;
+    background: linear-gradient(110deg, #237cff, #54b4ff);
+    box-shadow: 0 8px 25px #237cff25;
+    transition: transform .2s;
+}
+
+.primary-btn:active {
+    transform: scale(.98);
+}
+
+.primary-btn:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+.secondary-btn {
+    width: 100%;
+    padding: 14px;
+    background: #1b2638;
+    color: white;
+    border: 1px solid #34445d;
+    border-radius: 13px;
+    font-weight: 700;
+}
+
+.mini-stats {
+    display: flex;
+    gap: 9px;
+    margin-top: 18px;
+}
+
+.stat {
+    flex: 1;
+    text-align: center;
+    padding: 13px 3px;
+    background: #0b1220;
+    border: 1px solid #202f45;
+    border-radius: 13px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 19px;
+    color: var(--blue);
+}
+
+.stat small {
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.note {
+    color: #7e8ba0;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.7;
+    margin-top: 18px;
+}
+
+.quiz-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.quiz-top strong {
+    color: var(--blue);
+}
+
+.progress-track {
+    width: 100%;
+    height: 7px;
+    background: #252f41;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #237cff, #6bc8ff);
+    transition: width .3s;
+    border-radius: 20px;
+}
+
+.question-sticker {
+    width: 95px;
+    height: 95px;
+    margin: 0 auto 20px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, #1a3155, #101827);
+    border: 1px solid #31527d;
+    border-radius: 26px;
+    font-size: 50px;
+    box-shadow: 0 10px 35px #00000025;
+}
+
+.question-title {
+    text-align: center;
+    font-size: 22px;
+    line-height: 1.4;
+    margin-bottom: 9px;
+}
+
+.question-desc {
+    color: var(--muted);
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 23px;
+}
+
+.options {
+    display: grid;
+    gap: 11px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 13px;
+    min-height: 70px;
+    text-align: left;
+    color: white;
+    background: #0c1422;
+    border: 1px solid #2b3b53;
+    border-radius: 14px;
+    transition: background .2s, border-color .2s;
+}
+
+.option:active {
+    transform: scale(.99);
+}
+
+.option-sticker {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #1b2a41;
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+}
+
+.option-text {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.option-check {
+    font-size: 20px;
+    font-weight: 900;
+    opacity: 0;
+}
+
+.option.correct {
+    background: #103b28;
+    border: 2px solid var(--green);
+    color: #86efac;
+}
+
+.option.correct .option-sticker {
+    background: #14532d;
+}
+
+.option.correct .option-check {
+    opacity: 1;
+    color: #4ade80;
+}
+
+.option.wrong {
+    background: #451a1a;
+    border: 2px solid var(--red);
+    color: #fca5a5;
+}
+
+.option.wrong .option-sticker {
+    background: #7f1d1d;
+}
+
+.option.wrong .option-check {
+    opacity: 1;
+    color: #f87171;
+}
+
+.option:disabled {
+    cursor: default;
+    opacity: 1;
+    transform: none;
+}
+
+.result-card {
+    text-align: center;
+}
+
+.result-sticker {
+    font-size: 75px;
+    margin: 12px 0 20px;
+}
+
+.result-title {
+    font-size: 26px;
+    line-height: 1.3;
+    margin-bottom: 13px;
+}
+
+.result-title.good {
+    color: #65c5ff;
+}
+
+.result-title.bad {
+    color: #ff777e;
+}
+
+.result-title.mid {
+    color: #ffcf70;
+}
+
+.result-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #c0cada;
+    margin-bottom: 17px;
+}
+
+.result-name {
+    color: var(--blue);
+    font-size: 16px;
+    margin-bottom: 8px;
+    overflow-wrap: anywhere;
+}
+
+.score-circle {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    border: 5px solid var(--blue);
+    display: grid;
+    place-content: center;
+    margin: 22px auto;
+    box-shadow: 0 0 30px #4da6ff25;
+}
+
+.score-circle strong {
+    font-size: 34px;
+}
+
+.score-circle small {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.result-buttons {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.section-title {
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.section-desc {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 22px;
+    line-height: 1.6;
+}
+
+.leader-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #0b1422;
+    border: 1px solid #263750;
+    padding: 12px;
+    border-radius: 13px;
+    margin-bottom: 10px;
+}
+
+.rank {
+    width: 30px;
+    font-weight: 900;
+    font-size: 15px;
+    color: #ffc96d;
+    flex-shrink: 0;
+}
+
+.leader-avatar {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #1c2e48;
+    font-size: 21px;
+}
+
+.leader-info {
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+}
+
+.leader-info strong {
+    display: block;
+    overflow-wrap: anywhere;
+    font-size: 13px;
+}
+
+.leader-info small {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.leader-score {
+    color: var(--blue);
+    font-weight: 900;
+    font-size: 16px;
+}
+
+.empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 25px 5px;
+    line-height: 1.8;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #6d7b91;
+    font-size: 11px;
+    line-height: 2;
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 25px;
+    transform: translate(-50%, 100px);
+    opacity: 0;
+    background: #1c2b42;
+    border: 1px solid var(--blue);
+    padding: 13px 18px;
+    border-radius: 12px;
+    font-size: 13px;
+    transition: .3s;
+    z-index: 10;
+    width: max-content;
+    max-width: 90%;
+}
+
+.toast.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+@media (max-width: 360px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    .panel {
+        padding: 16px;
+    }
+
+    .question-title {
+        font-size: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="topbar">
+        <div class="logo">PRANAV<span>.</span></div>
+        <div class="tag">💙 FRIENDSHIP TEST</div>
+    </div>
+
+    <!-- HOME / NAME ENTRY -->
+
+    <section class="screen active" id="homeScreen">
+
+        <div class="hero">
+            <div class="hero-sticker">😈</div>
+
+            <h1>HOW WELL DO<br>YOU KNOW <span>PRANAV?</span></h1>
+
+            <p class="subtitle">
+                🎮 10 questions. 4 options each.<br>
+                Let's see how well you know your friend! 💀
+            </p>
+        </div>
+
+        <div class="panel">
+
+            <label class="label" for="playerName">
+                👤 ENTER YOUR NAME
+            </label>
+
+            <input
+                type="text"
+                id="playerName"
+                maxlength="24"
+                placeholder="Your name here..."
+                autocomplete="off"
+            >
+
+            <button class="primary-btn" onclick="startQuiz()">
+                LET'S TEST OUR FRIENDSHIP ⚡
+            </button>
+
+            <div class="mini-stats">
+                <div class="stat">
+                    <strong>10</strong>
+                    <small>QUESTIONS</small>
+                </div>
+
+                <div class="stat">
+                    <strong>4</strong>
+                    <small>OPTIONS</small>
+                </div>
+
+                <div class="stat">
+                    <strong>🏆</strong>
+                    <small>LEADERBOARD</small>
+                </div>
+            </div>
+
+        </div>
+
+        <p class="note">
+            💙 Made for the real ones.<br>
+            Answer honestly and have fun!
+        </p>
+
+        <button class="secondary-btn"
+                style="margin-top:18px"
+                onclick="showLeaderboard()">
+            🏆 VIEW LEADERBOARD
+        </button>
+
+    </section>
+
+
+    <!-- QUIZ -->
+
+    <section class="screen" id="quizScreen">
+
+        <div class="panel">
+
+            <div class="quiz-top">
+                <span id="questionCounter">QUESTION 1 / 10</span>
+                <strong id="scoreCounter">SCORE: 0</strong>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+
+            <div class="question-sticker" id="questionSticker">🎮</div>
+
+            <h2 class="question-title" id="questionTitle"></h2>
+
+            <p class="question-desc">
+                Choose one answer 👀
+            </p>
+
+            <div class="options" id="optionsContainer"></div>
+
+            <!-- No Back button -->
+
+        </div>
+
+        <p class="note">
+            🔥 Question <span id="bottomQuestion">1</span> of 10
+        </p>
+
+    </section>
+
+
+    <!-- RESULTS -->
+
+    <section class="screen" id="resultScreen">
+
+        <div class="panel result-card">
+
+            <div class="result-sticker" id="resultSticker">💙</div>
+
+            <div class="result-name" id="resultPlayer"></div>
+
+            <h2 class="result-title" id="resultTitle"></h2>
+
+            <div class="score-circle">
+                <div>
+                    <strong id="finalScore">0</strong>
+                    <small>/ 10 POINTS</small>
+                </div>
+            </div>
+
+            <p class="result-text" id="resultDescription"></p>
+
+            <p class="result-text" id="resultMessage"></p>
+
+            <button class="primary-btn" onclick="shareResult()">
+                📲 SHARE MY RESULT
+            </button>
+
+            <div class="result-buttons">
+
+                <button class="secondary-btn" onclick="playAgain()">
+                    🔄 PLAY AGAIN
+                </button>
+
+                <button class="secondary-btn" onclick="showLeaderboard()">
+                    🏆 VIEW LEADERBOARD
+                </button>
+
+                <button class="secondary-btn" onclick="goHome()">
+                    🏠 HOME
+                </button>
+
+            </div>
+
+        </div>
+
+        <p class="note">
+            💙 Real friendship is about trust, loyalty and respect.
+        </p>
+
+    </section>
+
+
+    <!-- LEADERBOARD -->
+
+    <section class="screen" id="leaderboardScreen">
+
+        <div class="panel">
+
+            <div class="hero">
+                <div class="hero-sticker">🏆</div>
+
+                <h2 class="section-title">FRIENDS LEADERBOARD</h2>
+
+                <p class="section-desc">
+                    Who knows Pranav the best? 👀
+                </p>
+            </div>
+
+            <div id="leaderboardList"></div>
+
+            <button class="primary-btn" onclick="goHome()">
+                🏠 BACK TO HOME
+            </button>
+
+            <p class="note">
+                Scores are saved in this browser.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="footer">
+        MADE WITH 💙 FOR PRANAV<br>
+        REAL ONES ONLY. NO FAKE VIBES. 😎
+    </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+// ===================================
+// QUESTIONS AND CORRECT ANSWERS
+// ===================================
+
+const questions = [
+    {
+        sticker: "🎮",
+        question: "Where does Pranav spend his money? 💸",
+        options: [
+            { sticker: "🎮", text: "Video games" },
+            { sticker: "👕", text: "Clothes" },
+            { sticker: "🍔", text: "Food" },
+            { sticker: "📱", text: "Mobile accessories" }
+        ],
+        answer: 0
+    },
+
+    {
+        sticker: "🍔",
+        question: "What is Pranav's favourite street food? 🤤",
+        options: [
+            { sticker: "🥪", text: "Vada Pav" },
+            { sticker: "🌮", text: "Pani Puri" },
+            { sticker: "🍕", text: "Pizza" },
+            { sticker: "🍜", text: "Momos" }
+        ],
+        answer: 0
+    },
+
+    {
+        sticker: "🔥",
+        question: "What is Pranav's favourite game? 🎯",
+        options: [
+            { sticker: "🔫", text: "Free Fire" },
+            { sticker: "🪖", text: "BGMI" },
+            { sticker: "⛏️", text: "Minecraft" },
+            { sticker: "🚗", text: "GTA" }
+        ],
+        answer: 0
+    },
+
+    {
+        sticker: "⚡",
+        question: "What is Pranav's favourite anime? 🎌",
+        options: [
+            { sticker: "⚡", text: "Pokémon" },
+            { sticker: "🍥", text: "Naruto" },
+            { sticker: "🏴‍☠️", text: "One Piece" },
+            { sticker: "🗡️", text: "Demon Slayer" }
+        ],
+        answer: 0
+    },
+
+    {
+        sticker: "🌑",
+        question: "What is Pranav afraid of? 😨",
+        options: [
+            { sticker: "🌑", text: "Being alone in a dark room" },
+            { sticker: "🕷️", text: "Spiders" },
+            { sticker: "👻", text: "Ghosts" },
+            { sticker: "🌊", text: "Deep water" }
+        ],
+        answer: 0
+    },
+
+    {
+        sticker: "🤝",
+        question: "What is Pranav most interested in? 💙",
+        options: [
+            { sticker: "👬", text: "Being with friends" },
+            { sticker: "🎬", text: "Watching movies" },
+            { sticker: "😴", text: "Sleeping all day" },
+            { sticker: "🛍️", text: "Shopping" }
+        ],
+        answer: 0
+    },
+
+    {
+        sticker: "⚡",
+        question: "Who is Pranav's favourite anime character? 🎒",
+        options: [
+            { sticker: "🎒", text: "Ash Ketchum" },
+            { sticker: "⚡", text: "Pikachu" },
+            { sticker: "🍥", text: "Naruto Uzumaki" },
+            { sticker: "🏴‍☠️", text: "Monkey D. Luffy" }
+        ],
+        answer: 0
+    },
+
+    {
+        sticker: "🎵",
+        question: "What is Pranav interested in? 🎧",
+        options: [
+            { sticker: "🎵", text: "Music" },
+            { sticker: "🏏", text: "Cricket" },
+            { sticker: "🎨", text: "Painting" },
+            { sticker: "💃", text: "Dancing" }
+        ],
+        answer: 0
+    },
+
+    {
+        sticker: "📱",
+        question: "How does Pranav write a message? ✍️",
+        options: [
+            { sticker: "📝", text: "A long paragraph" },
+            { sticker: "💬", text: "A short reply" },
+            { sticker: "😂", text: "Only emojis" },
+            { sticker: "🎤", text: "Voice messages" }
+        ],
+        answer: 0
+    },
+
+    {
+        sticker: "🐍",
+        question: "What does Pranav hate the most? 😤",
+        options: [
+            { sticker: "🎭", text: "Fake friends" },
+            { sticker: "🎮", text: "Losing a game" },
+            { sticker: "⏰", text: "Waking up early" },
+            { sticker: "📚", text: "Homework" }
+        ],
+        answer: 0
+    }
+];
+
+let currentQuestion = 0;
+let selectedAnswers = [];
+let player = "";
+let finalPoints = 0;
+let answering = false;
+let nextTimer = null;
+
+
+// ===================================
+// NAVIGATION
+// ===================================
+
+function switchScreen(screenId) {
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById(screenId).classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+function toast(message) {
+    const element = document.getElementById("toast");
+
+    element.textContent = message;
+    element.classList.add("show");
+
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
+        element.classList.remove("show");
+    }, 2500);
+}
+
+
+// ===================================
+// START QUIZ
+// ===================================
+
+function startQuiz() {
+    const input = document.getElementById("playerName");
+    const name = input.value.trim();
+
+    if (!name) {
+        toast("👀 Enter your name first!");
+        input.focus();
+        return;
+    }
+
+    clearTimeout(nextTimer);
+
+    player = name.slice(0, 24);
+    currentQuestion = 0;
+    selectedAnswers = [];
+    finalPoints = 0;
+    answering = false;
+
+    switchScreen("quizScreen");
+    renderQuestion();
+}
+
+
+// ===================================
+// RENDER QUESTION
+// ===================================
+
+function renderQuestion() {
+    answering = false;
+
+    const q = questions[currentQuestion];
+
+    document.getElementById("questionCounter").textContent =
+        `QUESTION ${currentQuestion + 1} / ${questions.length}`;
+
+    document.getElementById("bottomQuestion").textContent =
+        currentQuestion + 1;
+
+    document.getElementById("scoreCounter").textContent =
+        "SCORE: " + calculateScore();
+
+    document.getElementById("progressBar").style.width =
+        (currentQuestion / questions.length * 100) + "%";
+
+    document.getElementById("questionSticker").textContent = q.sticker;
+    document.getElementById("questionTitle").textContent = q.question;
+
+    const container = document.getElementById("optionsContainer");
+    container.innerHTML = "";
+
+    q.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.className = "option";
+
+        const sticker = document.createElement("span");
+        sticker.className = "option-sticker";
+        sticker.textContent = option.sticker;
+
+        const text = document.createElement("span");
+        text.className = "option-text";
+        text.textContent = option.text;
+
+        const check = document.createElement("span");
+        check.className = "option-check";
+
+        button.append(sticker, text, check);
+
+        button.addEventListener("click", () => {
+            chooseAnswer(index);
+        });
+
+        container.appendChild(button);
+    });
+}
+
+
+// ===================================
+// SCORING
+// ===================================
+
+function calculateScore() {
+    return selectedAnswers.reduce((score, answer, index) => {
+        return score +
+            (answer === questions[index].answer ? 1 : 0);
+    }, 0);
+}
+
+
+// ===================================
+// SELECT ANSWER + AUTO NEXT
+// ===================================
+
+function chooseAnswer(index) {
+    if (answering) return;
+
+    answering = true;
+
+    const q = questions[currentQuestion];
+
+    selectedAnswers[currentQuestion] = index;
+
+    const buttons = document.querySelectorAll(
+        "#optionsContainer .option"
+    );
+
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+
+    const isCorrect = index === q.answer;
+
+    // Always show the correct answer in green.
+    buttons[q.answer].classList.add("correct");
+    buttons[q.answer].querySelector(".option-check").textContent = "✓";
+
+    // Show the selected wrong answer in red.
+    if (!isCorrect) {
+        buttons[index].classList.add("wrong");
+        buttons[index].querySelector(".option-check").textContent = "✕";
+    }
+
+    document.getElementById("scoreCounter").textContent =
+        "SCORE: " + calculateScore();
+
+    document.getElementById("progressBar").style.width =
+        ((currentQuestion + 1) / questions.length * 100) + "%";
+
+    // Allow time for the user to see the colour feedback.
+    nextTimer = setTimeout(() => {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            renderQuestion();
+        } else {
+            finishQuiz();
+        }
+    }, 1200);
+}
+
+
+// ===================================
+// FINISH QUIZ
+// ===================================
+
+function finishQuiz() {
+    clearTimeout(nextTimer);
+
+    finalPoints = calculateScore();
+
+    document.getElementById("progressBar").style.width = "100%";
+
+    saveResult({
+        name: player,
+        score: finalPoints,
+        date: new Date().toISOString()
+    });
+
+    displayResult();
+    switchScreen("resultScreen");
+}
+
+
+// ===================================
+// RESULT PAGE
+// ===================================
+
+function displayResult() {
+    document.getElementById("resultPlayer").textContent =
+        "PLAYER: " + player;
+
+    document.getElementById("finalScore").textContent =
+        finalPoints;
+
+    const title = document.getElementById("resultTitle");
+    const sticker = document.getElementById("resultSticker");
+    const description = document.getElementById("resultDescription");
+    const message = document.getElementById("resultMessage");
+
+    title.className = "result-title";
+
+    if (finalPoints > 5) {
+        sticker.textContent = "💙🏆";
+        title.textContent = "YOU'RE NOT A FAKE FRIEND!";
+        title.classList.add("good");
+
+        description.textContent =
+            "YOOO! You know Pranav pretty well! 🔥";
+
+        message.textContent =
+            "Real one detected! Keep the friendship strong. 🤝💙";
+
+    } else if (finalPoints < 5) {
+        sticker.textContent = "💀🎭";
+        title.textContent = "YOU'RE A FAKE FRIEND!";
+        title.classList.add("bad");
+
+        description.textContent =
+            "Bro, do you even know Pranav? 😭";
+
+        message.textContent =
+            "Better luck next time! Learn more about your friend. 😂";
+
+    } else {
+        sticker.textContent = "🤔💙";
+        title.textContent = "YOU'RE IN THE MIDDLE!";
+        title.classList.add("mid");
+
+        description.textContent =
+            "You got exactly 5 out of 10!";
+
+        message.textContent =
+            "You're right in the middle. Try again and aim higher! 🔥";
+    }
+}
+
+
+// ===================================
+// LOCAL LEADERBOARD
+// ===================================
+
+function getResults() {
+    try {
+        const data = JSON.parse(
+            localStorage.getItem("pranavFriendshipResults") || "[]"
+        );
+
+        return Array.isArray(data) ? data : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveResult(record) {
+    try {
+        const results = getResults();
+
+        results.push(record);
+        results.sort((a, b) => b.score - a.score);
+
+        localStorage.setItem(
+            "pranavFriendshipResults",
+            JSON.stringify(results.slice(0, 100))
+        );
+    } catch (error) {
+        toast("⚠️ Could not save leaderboard on this device.");
+    }
+}
+
+function showLeaderboard() {
+    const results = getResults();
+    const container = document.getElementById("leaderboardList");
+
+    container.innerHTML = "";
+
+    if (results.length === 0) {
+        container.innerHTML = `
+            <div class="empty">
+                🏆<br><br>
+                No scores yet!<br>
+                Be the first to take the test. 💙
+            </div>
+        `;
+    } else {
+        results.forEach((record, index) => {
+            const row = document.createElement("div");
+            row.className = "leader-row";
+
+            const rank = document.createElement("div");
+            rank.className = "rank";
+
+            rank.textContent =
+                index === 0 ? "🥇" :
+                index === 1 ? "🥈" :
+                index === 2 ? "🥉" :
+                "#" + (index + 1);
+
+            const avatar = document.createElement("div");
+            avatar.className = "leader-avatar";
+            avatar.textContent = "😎";
+
+            const info = document.createElement("div");
+            info.className = "leader-info";
+
+            const name = document.createElement("strong");
+            name.textContent = record.name;
+
+            const status = document.createElement("small");
+
+            status.textContent =
+                record.score > 5 ? "💙 Not a fake friend" :
+                record.score < 5 ? "💀 Fake friend" :
+                "🤔 Middle score";
+
+            info.append(name, status);
+
+            const score = document.createElement("div");
+            score.className = "leader-score";
+            score.textContent = record.score + "/10";
+
+            row.append(rank, avatar, info, score);
+            container.appendChild(row);
+        });
+    }
+
+    switchScreen("leaderboardScreen");
+}
+
+
+// ===================================
+// SHARE RESULT
+// ===================================
+
+async function shareResult() {
+    const text =
+        "💙 PRANAV'S REAL FRIENDS TEST 💙\n\n" +
+        "Player: " + player + "\n" +
+        "Score: " + finalPoints + "/10\n" +
+        document.getElementById("resultTitle").textContent + "\n\n" +
+        "Can you beat my score? 😈🔥";
+
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: "Pranav - Friendship Test",
+                text: text
+            });
+        } catch (error) {
+            // User cancelled sharing.
+        }
+    } else {
+        try {
+            await navigator.clipboard.writeText(text);
+            toast("📋 Result copied! Send it to your friends.");
+        } catch (error) {
+            window.prompt("Copy your result:", text);
+        }
+    }
+}
+
+
+// ===================================
+// RESTART / HOME
+// ===================================
+
+function playAgain() {
+    clearTimeout(nextTimer);
+
+    currentQuestion = 0;
+    selectedAnswers = [];
+    finalPoints = 0;
+    answering = false;
+
+    document.getElementById("playerName").value = player;
+
+    switchScreen("homeScreen");
+}
+
+function goHome() {
+    clearTimeout(nextTimer);
+    answering = false;
+    switchScreen("homeScreen");
+}
+
+</script>
+
+</body>
+</html>
